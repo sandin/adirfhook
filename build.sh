@@ -9,7 +9,7 @@ cmake \
   -DANDROID_STL=c++_static \
   -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=. \
   -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=. \
+  -DCMAKE_BUILD_TYPE=Debug \
   ..
 
-#-DCMAKE_BUILD_TYPE=Release \
 cmake --build .

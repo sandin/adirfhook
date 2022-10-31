@@ -1,0 +1,1 @@
+artinjector -i ./libadirfhook.so --launch -p $1

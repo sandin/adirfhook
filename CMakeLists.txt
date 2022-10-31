@@ -1,12 +1,17 @@
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.18)
 
 project("adirfhook")
 set(CMAKE_CXX_STANDARD 11)
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+#set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--exclude-libs,ALL")
 
 find_library(log-lib log)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SOURCES
-  src/main.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/hook/hookmanager.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )
 
 # frida-gum requires, ref: build/frida-android-arm64/lib/pkgconfig/frida-gum-1.0.pc
@@ -20,7 +25,7 @@ include_directories(${FRIDA_SDK_DIR}/include/glib-2.0)
 include_directories(${FRIDA_SDK_DIR}/include/gio-unix-2.0)
 include_directories(${FRIDA_SDK_DIR}/lib/glib-2.0/include)
 include_directories(${FRIDA_SDK_DIR}/include/capstone)
-link_directories(${FRIDA_SDK_DIR}/lib)
+link_directories(${PROJECT_NAME} ${FRIDA_SDK_DIR}/lib)
 set(FRIDA_SDK_LIBS 
   libglib-2.0.a
   libcapstone.a 
